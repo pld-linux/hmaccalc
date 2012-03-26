@@ -1,0 +1,45 @@
+--- hmaccalc-0.9.12/src/hmac.c~	2009-12-16 03:06:27.000000000 +0100
++++ hmaccalc-0.9.12/src/hmac.c	2012-03-26 23:34:28.037080111 +0200
+@@ -64,7 +64,6 @@
+ 	{"sha1",   SEC_OID_SHA1,    512 / 8, 160 / 8},
+ #ifdef NON_FIPS
+ 	{"md5",    SEC_OID_MD5,     512 / 8, 128 / 8},
+-	{"md4",    SEC_OID_MD4,     512 / 8, 128 / 8},
+ 	{"md2",    SEC_OID_MD2,     512 / 8, 128 / 8},
+ #endif
+ };
+--- hmaccalc-0.9.12/src/Makefile.am~	2009-12-16 03:06:27.000000000 +0100
++++ hmaccalc-0.9.12/src/Makefile.am	2012-03-26 23:36:01.730048042 +0200
+@@ -4,7 +4,7 @@
+ bin_PROGRAMS = sha512hmac sha384hmac sha256hmac sha1hmac
+ man_MANS = sha512hmac.8 $(srcdir)/sha384hmac.8 $(srcdir)/sha256hmac.8 $(srcdir)/sha1hmac.8
+ EXTRA_DIST = sha512hmac.8.in sha384hmac.8 sha256hmac.8 sha1hmac.8 \
+-	     md5hmac.8 md4hmac.8 md2hmac.8
++	     md5hmac.8 md2hmac.8
+ 
+ HERE_CFLAGS = -DMAKE_CHECK_DIRECTORY=\"$(abs_builddir)\"
+ 
+@@ -27,15 +27,12 @@
+ @CHECK_PREFIX@hmac.@CHECK_SUFFIX@: hmac
+ 	$(builddir)/$^ -S > $(builddir)/$@
+ 
+-non_fips_programs = md5hmac md4hmac md2hmac
++non_fips_programs = md5hmac md2hmac
+ non_fips_data = \
+ 	@CHECK_PREFIX@md5hmac.@CHECK_SUFFIX@ \
+-	@CHECK_PREFIX@md4hmac.@CHECK_SUFFIX@ \
+ 	@CHECK_PREFIX@md2hmac.@CHECK_SUFFIX@
+ @CHECK_PREFIX@md5hmac.@CHECK_SUFFIX@: md5hmac
+ 	$(builddir)/$^ -S > $(builddir)/$@
+-@CHECK_PREFIX@md4hmac.@CHECK_SUFFIX@: md4hmac
+-	$(builddir)/$^ -S > $(builddir)/$@
+ @CHECK_PREFIX@md2hmac.@CHECK_SUFFIX@: md2hmac
+ 	$(builddir)/$^ -S > $(builddir)/$@
+ 
+@@ -43,5 +40,5 @@
+ AM_CFLAGS += -DNON_FIPS=1
+ bin_PROGRAMS += $(non_fips_programs)
+ sum_DATA += $(non_fips_data)
+-man_MANS += $(srcdir)/md5hmac.8 $(srcdir)/md4hmac.8 $(srcdir)/md2hmac.8
++man_MANS += $(srcdir)/md5hmac.8 $(srcdir)/md2hmac.8
+ endif
