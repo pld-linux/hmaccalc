@@ -4,17 +4,18 @@
 Summary:	Tools for computing and checking HMAC values for files
 Name:		hmaccalc
 Version:	0.9.12
-Release:	1
+Release:	2
 License:	MIT
 Group:		Base
-URL:		https://fedorahosted.org/hmaccalc/
 Source0:	https://fedorahosted.org/released/hmaccalc/%{name}-%{version}.tar.gz
 # Source0-md5:	bf1e70cac02f6cfa85826b8878a27985
+URL:		https://fedorahosted.org/hmaccalc/
 Patch0:		no-md4.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	nss-devel
-BuildRequires:	prelink
+BuildRequires:	pkgconfig
+Suggests:	prelink
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -31,6 +32,7 @@ coreutils package.
 %{__aclocal}
 %{__automake}
 %{__autoconf}
+PRELINK_CMD=/usr/sbin/prelink \
 %configure \
 	--enable-sum-directory=%{_libdir}/%{name} \
 	--enable-non-fips
