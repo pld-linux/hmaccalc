@@ -3,12 +3,12 @@
 #
 Summary:	Tools for computing and checking HMAC values for files
 Name:		hmaccalc
-Version:	0.9.12
-Release:	2
-License:	MIT
+Version:	0.9.14
+Release:	1
+License:	BSD
 Group:		Base
 Source0:	https://fedorahosted.org/released/hmaccalc/%{name}-%{version}.tar.gz
-# Source0-md5:	bf1e70cac02f6cfa85826b8878a27985
+# Source0-md5:	93cde34427cfbedfbdf8a468cfa65d20
 URL:		https://fedorahosted.org/hmaccalc/
 Patch0:		no-md4.patch
 BuildRequires:	autoconf
